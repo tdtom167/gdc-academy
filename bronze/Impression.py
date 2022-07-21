@@ -8,9 +8,18 @@
 #WRITE THE DATA INTO THE TABLE
 
 #df1 created from Impression
-df1 = spark.read.format("csv").options(header="true", inferSchema="true").option("delimiter", "\t").load('abfss://00landing@odapczlakeg2dev.dfs.core.windows.net/BRONZE/RAW/Adform/Impression/')
+df_impression = spark.read.format("csv").options(header="true", inferSchema="true").option("delimiter", "\t").load('abfss://00landing@odapczlakeg2dev.dfs.core.windows.net/BRONZE/RAW/Adform/Impression/')
 
-display(df1)
+display(df_impression)
+
+# COMMAND ----------
+
+# MAGIC %md
+# MAGIC <h3> Renaming multiple columns <h3>
+
+# COMMAND ----------
+
+df_impression_renamed = df_impression.withColumnRenamed("BannerId-AdGroupId","BannerId").withColumnRenamed("PlacementId-ActivityId","PlacementId")
 
 # COMMAND ----------
 
@@ -20,7 +29,7 @@ display(df1)
 # COMMAND ----------
 
 #save dataframe to a table
-df1.write.saveAsTable('iz_gdc_bronze.impression')
+df_impression_renamed.write.saveAsTable('iz_gdc_bronze.impression')
 
 
 # COMMAND ----------
@@ -32,7 +41,3 @@ df1.write.saveAsTable('iz_gdc_bronze.impression')
 
 # MAGIC %sql
 # MAGIC SELECT * FROM iz_gdc_bronze.impression LIMIT 3
-
-# COMMAND ----------
-
-

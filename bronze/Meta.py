@@ -240,7 +240,6 @@ df_with_schema.write.saveAsTable('iz_gdc_bronze.iabcategories')
 
 # COMMAND ----------
 
-df13 = spark.read.json("abfss://00landing@odapczlakeg2dev.dfs.core.windows.net/BRONZE/RAW/Adform/meta_unzipeed/inventorysources.json")
 #CUSTOM SCHEMA FOR inventorysources
 schema = StructType([
     StructField("id",LongType(),True),
@@ -406,7 +405,7 @@ df_with_schema.write.saveAsTable('iz_gdc_bronze.zipcodes')
 # MAGIC --SELECT * FROM iz_gdc_bronze.operatingsystems;
 # MAGIC --SELECT * FROM iz_gdc_bronze.parties;
 # MAGIC --SELECT *FROM iz_gdc_bronze.placementsactivities;
-# MAGIC SELECT * FROM iz_gdc_bronze.screensizes;
+# MAGIC --SELECT * FROM iz_gdc_bronze.screensizes;
 # MAGIC --SELECT * FROM iz_gdc_bronze.tags;
 # MAGIC --SELECT * FROM iz_gdc_bronze.zipcodes;
 # MAGIC --SHOW TABLES FROM iz_gdc_bronze
